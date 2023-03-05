@@ -27,5 +27,18 @@ class HomeController extends Controller
         ]);
     }
 
+    public function category(String $type)
+    {
+        $newsItems = $this->fetchData('/v1/cnn-news/',$type)['data'];
+        $listType = $this->fetchData('')['listApi']['CNN News']['listType'];
+
+        // dd($newsData);
+        return view('category',[
+            'listType' => $listType,
+            'type' => ucwords(str_replace('-',' ',$type)),
+            'newsItems' => $newsItems
+        ]);
+    }
+
 
 }
